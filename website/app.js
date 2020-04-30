@@ -30,18 +30,16 @@
     });
 
   const updateUI = async () => {
-    try {
-      const { temperature, date, feeling } = await (await fetch(
-        "/api/v1/entry"
-      )).json();
-
-      dateElem.textContent = date;
-      tempElem.textContent = temperature;
-      contentElem.textContent = feeling;
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const request = await fetch('/all');
+  try {
+    const allData = await request.json();
+    document.getElementById('date').innerHTML = 'Date: ' + allData.date;
+    document.getElementById('temp').innerHTML = 'Temperature: ' + allData.temp;
+    document.getElementById('content').innerHTML = 'Note: ' + allData.user;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
   generateBtn.addEventListener("click", async () => {
     generateBtn.textContent = "Loading......";
