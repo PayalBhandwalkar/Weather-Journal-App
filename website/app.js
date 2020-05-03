@@ -12,9 +12,10 @@
   const feelingsElem = document.getElementById("feelings");
   const generateBtn = document.getElementById("generate");
 
+  /*
   const dateElem = document.getElementById("date");
   const tempElem = document.getElementById("temp");
-  const contentElem = document.getElementById("content");
+  const contentElem = document.getElementById("content"); */
 
   const getWeatherInfo = async zip =>
     await fetch(`${baseUrl}?zip=${zip}&units=metric&APPID=${apiKey}`);
@@ -29,17 +30,17 @@
       body: JSON.stringify({ temperature, date, feeling })
     });
 
-  const updateUI = async () => {
-  const request = await fetch('/all');
-  try {
-    const allData = await request.json();
-    document.getElementById('date').innerHTML = 'Date: ' + allData.date;
-    document.getElementById('temp').innerHTML = 'Temperature: ' + allData.temp;
-    document.getElementById('content').innerHTML = 'Note: ' + allData.user;
-  } catch (error) {
-    console.log("error", error);
-  }
-};
+    const updateUI = async () => {
+      const request = await fetch('/api/v1/entry');
+      try {
+        const allData = await request.json();
+        document.getElementById('date').innerHTML = 'Date: ' + allData.date;
+        document.getElementById('temp').innerHTML = 'Temperature: ' + allData.temperature;
+        document.getElementById('content').innerHTML = 'Note: ' + allData.feeling;
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
 
   generateBtn.addEventListener("click", async () => {
     generateBtn.textContent = "Loading......";
