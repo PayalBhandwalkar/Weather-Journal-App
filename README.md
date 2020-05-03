@@ -1,4 +1,4 @@
-# Udacity Front End Developer NanoDegree (FEND) Project#1: Weather Journal App
+###Weather Journal App
 
 ## Requirements
 
